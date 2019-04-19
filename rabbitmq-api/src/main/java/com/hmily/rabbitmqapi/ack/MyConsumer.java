@@ -34,8 +34,11 @@ public class MyConsumer extends DefaultConsumer {
         }
         if((Integer)properties.getHeaders().get("num") == 0) {
                                                 //是否为批量的，是否重回队列
+            System.out.println("deliveryTag == 0 时的 index :" + envelope.getDeliveryTag());
+            // channel.basicNack() 参数参考：https://www.cnblogs.com/piaolingzxh/p/5448927.html
             channel.basicNack(envelope.getDeliveryTag(), false, true);
         } else {
+            System.out.println("delivery tag != 0  时的 index :" + envelope.getDeliveryTag());
             channel.basicAck(envelope.getDeliveryTag(), false);
         }
     }

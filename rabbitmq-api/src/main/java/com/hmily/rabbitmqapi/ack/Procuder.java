@@ -1,10 +1,7 @@
 package com.hmily.rabbitmqapi.ack;
 
 import com.hmily.rabbitmqapi.common.RabbitMQCommon;
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -25,6 +22,7 @@ public class Procuder {
 
         String exchange = "test_ack_exchange";
         String routingKey = "ack.save";
+        MessageProperties messageProperties;
         for(int i =0; i < 5; i++){
             Map<String, Object> headers = new HashMap<String, Object>();
             headers.put("num", i);
